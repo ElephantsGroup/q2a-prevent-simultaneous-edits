@@ -20,9 +20,9 @@ Installation
 #. Extract the files.
 #. Change language strings in file **qa-prevent-simultaneous-edits-lang.php**
 #. Upload the files to a subfolder called ``prevent-simultaneous-edits`` inside the ``qa-plugins`` folder of your Q2A installation.
-#. Navigate to your site, go to **Admin -> Plugins** on your q2a install. You will see the notice: 'The Create Table for Simultaneous Edits module requires some _database initialization_.'
-#. Click on _database initialization_. Click Button **Install**
-#. The MySql table 'qa_edit_preventer' will be created. You get the notice: The module has completed database initialization.
+#. Navigate to your site, go to **Admin -> Plugins** on your q2a install. You will see the notice: 'The Create Table for Simultaneous Edits module requires some *database initialization*.'
+#. Click on *database initialization*. Then click button **Install**.
+#. The MySql table 'qa_edit_preventer' will be created. Notice appears: The module has completed database initialization.
 #. You are done! 
 #. Test the functionality by editing one post, open another browser, login with another user account, try to edit the same post. You should get a notice now!
 
