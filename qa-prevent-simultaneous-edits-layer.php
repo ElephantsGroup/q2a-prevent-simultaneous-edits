@@ -12,12 +12,7 @@
 		
 			// check if user comes to edit page
 			if (isset($this->content['form_q_edit'])) {
-			
-				// clean all entries from database that are older than 10 min
-				qa_db_query_sub('DELETE FROM `^edit_preventer`
-									WHERE `accessed` < (NOW() - INTERVAL 10 MINUTE)
-								');
-				
+							
 				// get userid
 				$userid = qa_get_logged_in_userid();
 				// get postid
@@ -48,11 +43,14 @@
 						break;
 					}
 					// get name of user that has been editing
-					$username = qa_db_read_one_assoc(qa_db_query_sub('SELECT handle FROM ^users WHERE userid = #', $row['userid']));
+					if(QA_FINAL_EXTERNAL_USERS)
+						$username = qa_lang_html('qa_prevent_sim_edits_lang/a_user');
+					else
+						$username = qa_db_read_one_assoc(qa_db_query_sub('SELECT handle FROM ^users WHERE userid = #', $row['userid']))['handle'];
 					
 					// notice frontend and bring back to question page
 					$this->output('<script type="text/javascript">
-						alert("'.qa_lang_html('qa_prevent_sim_edits_lang/post_edited_by').' '.$username['handle'].'.\n'.qa_lang_html('qa_prevent_sim_edits_lang/try_again_later').'");
+						alert("'.qa_lang_html('qa_prevent_sim_edits_lang/post_edited_by').' '.$username.'.\n'.qa_lang_html('qa_prevent_sim_edits_lang/try_again_later').'");
 						history.go(-1);
 					</script>');
 				}
@@ -77,6 +75,16 @@
 
 		}
 
+		function process_event( $event, $userid, $handle, $cookieid, $params )
+		{
+			if($event == 'q_edit')
+			{
+				// clean all entries from database that are older than 10 min
+				qa_db_query_sub('DELETE FROM `^edit_preventer`
+									WHERE `accessed` < (NOW() - INTERVAL 10 MINUTE)
+								');
+			}
+		}
 	} // end
 	
 
