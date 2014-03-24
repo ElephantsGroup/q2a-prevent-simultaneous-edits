@@ -58,7 +58,13 @@
 					}
 					// get name of user that has been editing
 					if(QA_FINAL_EXTERNAL_USERS)
-						$username = qa_lang_html('qa_prevent_sim_edits_lang/a_user');
+						if((bool)qa_opt('pse_EEU'))
+						{
+							$query = 'SELECT ' . qa_opt('pse_EUTH') . ' AS handle FROM `' . qa_opt('pse_EUT') .  '` WHERE ' . qa_opt('pse_EUTK') . ' = ' . $row['userid'];
+							$username = qa_db_read_one_assoc(qa_db_query_sub($query))['handle'];
+						}
+						else
+							$username = qa_lang_html('qa_prevent_sim_edits_lang/a_user');
 					else
 						$username = qa_db_read_one_assoc(qa_db_query_sub('SELECT handle FROM ^users WHERE userid = #', $row['userid']))['handle'];
 					

@@ -4,8 +4,8 @@
 	Plugin Name: Prevent Simultaneous Edits
 	Plugin URI: https://github.com/ElephantsGroup/q2a-prevent-simultaneous-edits
 	Plugin Description: Prevents simultaneous post edits by your users
-	Plugin Version: 1.1.0
-	Plugin Date: 2014-03-23
+	Plugin Version: 1.2.0
+	Plugin Date: 2014-03-24
 	Plugin Author: echteinfachtv
 	Plugin Author URI: http://www.echteinfach.tv
 	Plugin License: GPLv2
