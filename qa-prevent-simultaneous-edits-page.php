@@ -36,6 +36,12 @@ class qa_prevent_simultaneous_edits_page
 	{
 		$qa_content = qa_content_prepare();
 	
+		if (qa_user_permit_error('permit_view_locked_edits'))
+		{
+			$qa_content['error'] = qa_lang_html('qa_prevent_sim_edits_lang/permission_error');
+			return $qa_content;
+		}
+		
 		if((bool)qa_opt('pse_active')) {
 		
 			$jalali_date = (qa_opt('pse_date_type') == "2");
